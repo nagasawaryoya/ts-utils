@@ -1,19 +1,19 @@
 /**
  * プリミティブ型
  */
-type Primitive = boolean | number | string | bigint | symbol | undefined;
+export type Primitive = boolean | number | string | bigint | symbol | undefined;
 
 /**
  * keyの値でグループ化したオブジェクトの型
  */
-type GroupObj<T> = {
+export type GroupObj<T> = {
   [key in string | number]: T[];
 };
 
 /**
  * 配列ユーティリティークラス
  */
-class ArrayUtil {
+export class ArrayUtil {
   /**
    * 値が配列であるか検証する。
    *
@@ -160,7 +160,7 @@ class ArrayUtil {
     array: T[];
     key?: keyof T;
   }): GroupObj<T> {
-    let groupObj: GroupObj<T> = {};
+    const groupObj: GroupObj<T> = {};
     array.map((value) => {
       const groupKey = key ? value[key] : value;
       (groupObj[`${groupKey}`] = groupObj[`${groupKey}`] ?? []).push(value);
@@ -180,6 +180,7 @@ class ArrayUtil {
       return array;
     }
 
+    // eslint-disable-next-line prefer-spread
     return this.flatten([].concat.apply([], array));
   }
 
@@ -194,6 +195,7 @@ class ArrayUtil {
       return 0;
     }
 
+    // eslint-disable-next-line prefer-spread
     return 1 + this.maxLevel([].concat.apply([], array));
   }
 
