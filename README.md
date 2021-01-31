@@ -1,1 +1,1 @@
-# ts-array-utils
+# ts-utils
