@@ -1,3 +1,3 @@
-import { ArrayUtil } from './array/util';
+import { ArrayUtil } from './utils/arrayUtil';
 
 console.log(ArrayUtil.is([]));

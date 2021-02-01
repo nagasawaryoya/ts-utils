@@ -248,29 +248,6 @@ export class ArrayUtil {
   }
 
   /**
-   * arrayAはarrayBの下位集合であるか検証する。
-   *
-   * trueの場合:
-   * arrayAはarrayBの下位集合（サブセット）である。
-   * arrayBはarrayAの上位集合（スーパーセット）である。
-   *
-   * @param T[] arrayA 対象配列A
-   * @param T[] arrayB 対象配列B
-   * @returns boolean
-   */
-  public static isSubset<T>({
-    arrayA,
-    arrayB,
-  }: {
-    arrayA: T[];
-    arrayB: T[];
-  }): boolean {
-    const setB = new Set(arrayB);
-
-    return arrayA.every((arrA) => setB.has(arrA));
-  }
-
-  /**
    * arrayAとarrayBの和集合を返却する。
    *
    * @param T[] arrayA 対象配列A
