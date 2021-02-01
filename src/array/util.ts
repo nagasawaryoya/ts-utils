@@ -41,7 +41,7 @@ export class ArrayUtil {
    * @returns T[]
    */
   public static arrange<T>(value: any): T[] {
-    return this.is(value) ? value : Array.from<T>(value);
+    return this.is(value) ? value : [value];
   }
 
   /**
@@ -138,7 +138,7 @@ export class ArrayUtil {
    */
   public static unique<T>({ array, key }: { array: T[]; key?: keyof T }): T[] {
     return array.filter(
-      ((set) => (data: any) => {
+      ((set) => (data: T) => {
         const value = key ? data[key] : data;
         return !set.has(value) && set.add(value);
       })(new Set())
@@ -180,13 +180,14 @@ export class ArrayUtil {
       return array;
     }
 
-    // eslint-disable-next-line prefer-spread
     return this.flatten([].concat.apply([], array));
   }
 
   /**
-   * 配列内の最大階層を返却する。
-   *
+   * 配列内の最大階層（ネストの深さ）を返却する。
+   * [] => 0
+   * [[]] => 1
+   * 
    * @param any[] array 対象配列
    * @returns number 最大階層
    */
@@ -195,7 +196,6 @@ export class ArrayUtil {
       return 0;
     }
 
-    // eslint-disable-next-line prefer-spread
     return 1 + this.maxLevel([].concat.apply([], array));
   }
 
@@ -287,7 +287,7 @@ export class ArrayUtil {
     const union = new Set(arrayA);
     arrayB.map((arrB) => union.add(arrB));
 
-    return ArrayUtil.arrange(union);
+    return Array.from<T>(union);
   }
 
   /**
@@ -305,12 +305,12 @@ export class ArrayUtil {
     arrayB: T[];
   }): T[] {
     const setA = new Set(arrayA);
-    const intersection = new Set();
+    const intersection: Set<T> = new Set();
     arrayB
       .filter((arrB) => setA.has(arrB))
       .map((arrB) => intersection.add(arrB));
 
-    return ArrayUtil.arrange(intersection);
+    return Array.from<T>(intersection);
   }
 
   /**
@@ -330,6 +330,6 @@ export class ArrayUtil {
     const difference = new Set(arrayA);
     arrayB.map((arrB) => difference.delete(arrB));
 
-    return ArrayUtil.arrange(difference);
+    return Array.from<T>(difference);
   }
 }
