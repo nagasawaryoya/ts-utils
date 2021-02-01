@@ -4,13 +4,37 @@
   "scripts": {
     "build": "tsc",
     "build:w": "tsc -w",
-    "start": "ts-node-dev --respawn src/main"
+    "start": "ts-node-dev --respawn src/main",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.+)": "<rootDir>/src/$1"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/tests/**/*.spec.ts"
+    ]
   },
   "main": "main.ts",
   "repository": "https://github.com/nagasawaryoya/ts-utils.git",
   "author": "Ryoya <nagasawaryoya@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.0",
     "ts-loader": "^8.0.14",
     "ts-node-dev": "^1.1.1",
     "tsconfig-paths": "^3.9.0",
