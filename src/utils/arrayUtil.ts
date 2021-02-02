@@ -187,7 +187,7 @@ export class ArrayUtil {
    * 配列内の最大階層（ネストの深さ）を返却する。
    * [] => 0
    * [[]] => 1
-   * 
+   *
    * @param any[] array 対象配列
    * @returns number 最大階層
    */

@@ -1,26 +1,28 @@
 import { ArrayUtil } from '@/utils/arrayUtil';
 
-const testArray = ['dog','dog','cat'];
-const testUniqueArray = ['dog','cat','bird'];
+const testArray = ['dog', 'dog', 'cat'];
+const testUniqueArray = ['dog', 'cat', 'bird'];
 const testObjectArray = [
   { id: 1, gender: 'man', like: 'dog' },
   { id: 2, gender: 'woman', like: 'dog' },
-  { id: 3, gender: 'woman', like: 'cat' }
+  { id: 3, gender: 'woman', like: 'cat' },
 ];
 const deepNestArray = [
   [1, 2, 3],
   [4, 5, 6, [7, 8, 9]],
   [10, 11, 12, [13, 14, 15, [16, 17, 18]]],
-  [19, 20, 21, [22, 23, 24, [25, 26, 27, [28, 29, 30]]]]
+  [19, 20, 21, [22, 23, 24, [25, 26, 27, [28, 29, 30]]]],
 ];
 const deepNestObjectArray = [
   [{ a: 'a' }],
   [{ a: 'a' }, [{ a: 'a' }, { a: 'a' }]],
-  [{ a: 'a' }, [{ a: 'a' }, { a: 'a' }, { a: 'a' }, [{ a: 'a' }, { a: 'a' }, { a: 'a' }]]]
+  [
+    { a: 'a' },
+    [{ a: 'a' }, { a: 'a' }, { a: 'a' }, [{ a: 'a' }, { a: 'a' }, { a: 'a' }]],
+  ],
 ];
 
 describe('ArrayUtilクラスのテストを実行する。', (): void => {
-
   describe('【メソッド】isのテストを実行する。', (): void => {
     test('引数に配列が渡された場合は「true」を返すことをテストする。', (): void => {
       expect(ArrayUtil.is([])).toBeTruthy();
@@ -31,7 +33,7 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       expect(ArrayUtil.is([{ test: null }])).toBeTruthy();
       expect(ArrayUtil.is([{ test: undefined }])).toBeTruthy();
     });
-  
+
     test('引数に配列以外が渡された場合は「false」を返すことをテストする。', (): void => {
       expect(ArrayUtil.is('配列じゃない')).toBeFalsy();
       expect(ArrayUtil.is(0)).toBeFalsy();
@@ -78,10 +80,12 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       expect(ArrayUtil.arrange([{ test: 'aaaa' }])).toEqual([{ test: 'aaaa' }]);
       expect(ArrayUtil.arrange([null])).toEqual([null]);
       expect(ArrayUtil.arrange([undefined])).toEqual([undefined]);
-      expect(ArrayUtil.arrange([
-        { aaa: 'aaa', bbb: 'bbb' },
-        { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
-      ])).toEqual([
+      expect(
+        ArrayUtil.arrange([
+          { aaa: 'aaa', bbb: 'bbb' },
+          { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
+        ])
+      ).toEqual([
         { aaa: 'aaa', bbb: 'bbb' },
         { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
       ]);
@@ -95,10 +99,12 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       expect(ArrayUtil.arrange([{ test: 'aaaa' }])).toEqual([{ test: 'aaaa' }]);
       expect(ArrayUtil.arrange([null])).toEqual([null]);
       expect(ArrayUtil.arrange([undefined])).toEqual([undefined]);
-      expect(ArrayUtil.arrange([
-        { aaa: 'aaa', bbb: 'bbb' },
-        { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
-      ])).toEqual([
+      expect(
+        ArrayUtil.arrange([
+          { aaa: 'aaa', bbb: 'bbb' },
+          { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
+        ])
+      ).toEqual([
         { aaa: 'aaa', bbb: 'bbb' },
         { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
       ]);
@@ -112,10 +118,12 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       expect(ArrayUtil.arrange([{ test: 'aaaa' }])).toEqual([{ test: 'aaaa' }]);
       expect(ArrayUtil.arrange([null])).toEqual([null]);
       expect(ArrayUtil.arrange([undefined])).toEqual([undefined]);
-      expect(ArrayUtil.arrange([
-        { aaa: 'aaa', bbb: 'bbb' },
-        { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
-      ])).toEqual([
+      expect(
+        ArrayUtil.arrange([
+          { aaa: 'aaa', bbb: 'bbb' },
+          { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
+        ])
+      ).toEqual([
         { aaa: 'aaa', bbb: 'bbb' },
         { aaa: 'aaa', bbb: ['b', 'b', 'b'] },
       ]);
@@ -124,41 +132,67 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
 
   describe('【メソッド】duplicateのテストを実行する。', (): void => {
     test('引数に渡された配列内の重複した値の配列を返すことをテストする。', (): void => {
-      expect(ArrayUtil.duplicate({ array: ['A', 'B', 'A', 'C', 'B', 'D'] })).toEqual(['A', 'B']);
-      expect(ArrayUtil.duplicate({ array: [1, 2, 1, 2, 3, 4] })).toEqual([1, 2]);
+      expect(
+        ArrayUtil.duplicate({ array: ['A', 'B', 'A', 'C', 'B', 'D'] })
+      ).toEqual(['A', 'B']);
+      expect(ArrayUtil.duplicate({ array: [1, 2, 1, 2, 3, 4] })).toEqual([
+        1,
+        2,
+      ]);
     });
 
     test('引数に渡された配列内で重複した値がない場合は空の配列を返すことをテストする。', (): void => {
-      expect(ArrayUtil.duplicate({ array: ['A', 'B', 'C', 'D', 'E', 'F'] })).toEqual([]);
+      expect(
+        ArrayUtil.duplicate({ array: ['A', 'B', 'C', 'D', 'E', 'F'] })
+      ).toEqual([]);
       expect(ArrayUtil.duplicate({ array: [1, 2, 3, 4, 5, 6] })).toEqual([]);
     });
 
     test('引数"ignore"に渡された値は重複を無視することをテストする。', (): void => {
-      expect(ArrayUtil.duplicate({ array: ['A', 'B', 'A', 'C', 'B', 'D'], ignore: 'A' })).toEqual(['B']);
-      expect(ArrayUtil.duplicate({ array: [1, 2, 1, 2, 3, 4], ignore: 1 })).toEqual([2]);
+      expect(
+        ArrayUtil.duplicate({
+          array: ['A', 'B', 'A', 'C', 'B', 'D'],
+          ignore: 'A',
+        })
+      ).toEqual(['B']);
+      expect(
+        ArrayUtil.duplicate({ array: [1, 2, 1, 2, 3, 4], ignore: 1 })
+      ).toEqual([2]);
     });
   });
 
   describe('【メソッド】findOneのテストを実行する。', (): void => {
     test('引数に渡されたobject配列"array"の"key"の値と"keyValue"が重複している値の先頭を返すことをテストする。', (): void => {
-      expect(ArrayUtil.findOne({ array: testObjectArray, keyValue: 'dog', key: 'like' })).toEqual({ id: 1, gender: 'man', like: 'dog' });
+      expect(
+        ArrayUtil.findOne({
+          array: testObjectArray,
+          keyValue: 'dog',
+          key: 'like',
+        })
+      ).toEqual({ id: 1, gender: 'man', like: 'dog' });
     });
 
     test('引数に渡されたobject配列"array"の"key"の値と"keyValue"が重複している値がない場合は「null」を返すことをテストする。', (): void => {
-      expect(ArrayUtil.findOne({ array: testObjectArray, keyValue: 4, key: 'id' })).toBeNull();
+      expect(
+        ArrayUtil.findOne({ array: testObjectArray, keyValue: 4, key: 'id' })
+      ).toBeNull();
     });
   });
 
   describe('【メソッド】findのテストを実行する。', (): void => {
     test('引数に渡されたobject配列"array"の"key"の値と"keyValue"が重複している値を全て返すことをテストする。', (): void => {
-      expect(ArrayUtil.find({ array: testObjectArray, keyValue: 'dog', key: 'like' })).toEqual([
+      expect(
+        ArrayUtil.find({ array: testObjectArray, keyValue: 'dog', key: 'like' })
+      ).toEqual([
         { id: 1, gender: 'man', like: 'dog' },
-        { id: 2, gender: 'woman', like: 'dog' }
+        { id: 2, gender: 'woman', like: 'dog' },
       ]);
     });
 
     test('引数に渡されたobject配列"array"の"key"の値と"keyValue"が重複している値がない場合は空の配列を返すことをテストする。', (): void => {
-      expect(ArrayUtil.find({ array: testObjectArray, keyValue: 4, key: 'id' })).toEqual([]);
+      expect(
+        ArrayUtil.find({ array: testObjectArray, keyValue: 4, key: 'id' })
+      ).toEqual([]);
     });
   });
 
@@ -169,49 +203,63 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       });
 
       test('引数に渡された配列内の値が既に一意で合った場合はそのまま返すことをテストする。', (): void => {
-        expect(ArrayUtil.unique({ array: testUniqueArray })).toEqual(testUniqueArray);
+        expect(ArrayUtil.unique({ array: testUniqueArray })).toEqual(
+          testUniqueArray
+        );
       });
     });
 
     describe('- object配列', (): void => {
       test('引数に渡された配列内の指定されたkeyの値を一意にして返すことをテストする。', (): void => {
-        expect(ArrayUtil.unique({ array: testObjectArray, key: 'like' })).toEqual([
+        expect(
+          ArrayUtil.unique({ array: testObjectArray, key: 'like' })
+        ).toEqual([
           { id: 1, gender: 'man', like: 'dog' },
-          { id: 3, gender: 'woman', like: 'cat' }
+          { id: 3, gender: 'woman', like: 'cat' },
         ]);
       });
 
       test('引数に渡された配列内の指定されたkeyの値をが既に一意で合った場合はそのまま返すことをテストする。', (): void => {
-        expect(ArrayUtil.unique({ array: testObjectArray, key: 'id' })).toEqual(testObjectArray);
+        expect(ArrayUtil.unique({ array: testObjectArray, key: 'id' })).toEqual(
+          testObjectArray
+        );
       });
     });
   });
 
   describe('【メソッド】groupingのテストを実行する。', (): void => {
-
     describe('- 配列', (): void => {
       test('引数に渡された配列内の値をグループ化したobjectを返すことをテストする。', (): void => {
-        expect(ArrayUtil.grouping({ array: testArray })).toEqual({ cat: ["cat"], dog: ["dog", "dog"] });
-        expect(ArrayUtil.grouping({ array: testUniqueArray })).toEqual({　bird: ["bird"], cat: ["cat"], dog: ["dog"]});
+        expect(ArrayUtil.grouping({ array: testArray })).toEqual({
+          cat: ['cat'],
+          dog: ['dog', 'dog'],
+        });
+        expect(ArrayUtil.grouping({ array: testUniqueArray })).toEqual({
+          bird: ['bird'],
+          cat: ['cat'],
+          dog: ['dog'],
+        });
       });
     });
 
     describe('- object配列', (): void => {
       test('引数に渡された配列内の指定されたkeyの値をグループ化したobjectを返すことをテストする。', (): void => {
-        expect(ArrayUtil.grouping({ array: testObjectArray, key: 'like' })).toEqual({
-          cat: [
-            { gender: "woman", id: 3, like: "cat" }
-          ],
+        expect(
+          ArrayUtil.grouping({ array: testObjectArray, key: 'like' })
+        ).toEqual({
+          cat: [{ gender: 'woman', id: 3, like: 'cat' }],
           dog: [
-            { gender: "man", id: 1, like: "dog"} ,
-            { gender: "woman", id: 2, like: "dog" }
-          ]
+            { gender: 'man', id: 1, like: 'dog' },
+            { gender: 'woman', id: 2, like: 'dog' },
+          ],
         });
 
-        expect(ArrayUtil.grouping({ array: testObjectArray, key: 'id' })).toEqual({
-          1: [{ gender: "man", id: 1, like: "dog" }],
-          2: [{ gender: "woman", id: 2, like: "dog" }],
-          3: [{ gender: "woman", id: 3, like: "cat" }]
+        expect(
+          ArrayUtil.grouping({ array: testObjectArray, key: 'id' })
+        ).toEqual({
+          1: [{ gender: 'man', id: 1, like: 'dog' }],
+          2: [{ gender: 'woman', id: 2, like: 'dog' }],
+          3: [{ gender: 'woman', id: 3, like: 'cat' }],
         });
       });
     });
@@ -231,12 +279,49 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       expect(ArrayUtil.flatten([[]])).toEqual([]);
       expect(ArrayUtil.flatten([[[]]])).toEqual([]);
       expect(ArrayUtil.flatten(deepNestArray)).toEqual([
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
       ]);
-      expect(ArrayUtil.flatten(deepNestObjectArray)).toEqual([ 
-        { a: "a" }, { a: "a" }, { a: "a" }, { a: "a" }, { a: "a" },
-        { a: "a" }, { a: "a" }, { a: "a" }, { a: "a" }, { a: "a" }, { a: "a" }
+      expect(ArrayUtil.flatten(deepNestObjectArray)).toEqual([
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
+        { a: 'a' },
       ]);
     });
   });
@@ -261,56 +346,116 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
 
   describe('【メソッド】rangeのテストを実行する。', (): void => {
     test('引数に"stop"のみ渡された場合は 0~stop までの数列を作成し、返すことをテストする。', (): void => {
-      expect(ArrayUtil.range({ stop: 10 })).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(ArrayUtil.range({ stop: 10 })).toEqual([
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+      ]);
     });
 
     test('引数に"start"と"stop"が渡された場合は start~stop までの数列を作成し、返すことをテストする。', (): void => {
-      expect(ArrayUtil.range({ start: 1, stop: 10 })).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(ArrayUtil.range({ start: 1, stop: 10 })).toEqual([
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+      ]);
     });
 
     test('引数に"start"と"stop"と"step"が渡された場合は start~stop までの数列を step の感覚で増やしながら作成し、返すことをテストする。', (): void => {
-      expect(ArrayUtil.range({ start: 2, stop: 10, step: 2 })).toEqual([2, 4, 6, 8]);
+      expect(ArrayUtil.range({ start: 2, stop: 10, step: 2 })).toEqual([
+        2,
+        4,
+        6,
+        8,
+      ]);
     });
   });
-
 
   describe('【メソッド】isSupersetのテストを実行する。', (): void => {
     describe('引数"arrayA"は"arrayB"の「上位集合」であると同時に、"arrayB"は"arrayA"の「下位集合」である。', (): void => {
       test('引数"arrayA"の値は"arrayB"の値を全て含む場合は「true」を返すことをテストする。', (): void => {
-        expect(ArrayUtil.isSuperset({ arrayA: ['A', 'B', 'C', 'A'], arrayB: ['A', 'B', 'A'] })).toBeTruthy();
+        expect(
+          ArrayUtil.isSuperset({
+            arrayA: ['A', 'B', 'C', 'A'],
+            arrayB: ['A', 'B', 'A'],
+          })
+        ).toBeTruthy();
       });
     });
 
     describe('二つの配列は集合の関係性に無い。', (): void => {
       test('引数"arrayA"の値は"arrayB"の値を全て含ない場合は「false」を返すことをテストする。', (): void => {
-        expect(ArrayUtil.isSuperset({ arrayA: ['A', 'B', 'A'], arrayB: ['A', 'B', 'C', 'A'] })).toBeFalsy();
+        expect(
+          ArrayUtil.isSuperset({
+            arrayA: ['A', 'B', 'A'],
+            arrayB: ['A', 'B', 'C', 'A'],
+          })
+        ).toBeFalsy();
       });
     });
   });
 
   describe('【メソッド】unionのテストを実行する。', (): void => {
     test('引数"arrayA"と"arrayB"の値を含む全ての値をユニークにして返すことをテストする。', (): void => {
-      expect(ArrayUtil.union({ arrayA: ['A', 'B', 'C', 'A'], arrayB: ['A', 'B', 'A'] })).toEqual(['A', 'B', 'C']);
+      expect(
+        ArrayUtil.union({
+          arrayA: ['A', 'B', 'C', 'A'],
+          arrayB: ['A', 'B', 'A'],
+        })
+      ).toEqual(['A', 'B', 'C']);
     });
   });
 
   describe('【メソッド】intersectionのテストを実行する。', (): void => {
     test('引数"arrayA"と"arrayB"の値に重複する全ての値をユニークにして返すことをテストする。', (): void => {
-      expect(ArrayUtil.intersection({ arrayA: ['A', 'B', 'C', 'A'], arrayB: ['A', 'B', 'A'] })).toEqual(['A', 'B']);
+      expect(
+        ArrayUtil.intersection({
+          arrayA: ['A', 'B', 'C', 'A'],
+          arrayB: ['A', 'B', 'A'],
+        })
+      ).toEqual(['A', 'B']);
     });
 
     test('引数"arrayA"と"arrayB"の値に重複する値が無い場合は空の配列を返すことをテストする。', (): void => {
-      expect(ArrayUtil.intersection({ arrayA: ['A', 'B', 'C', 'A'], arrayB: ['X', 'Y', 'Z'] })).toEqual([]);
+      expect(
+        ArrayUtil.intersection({
+          arrayA: ['A', 'B', 'C', 'A'],
+          arrayB: ['X', 'Y', 'Z'],
+        })
+      ).toEqual([]);
     });
   });
 
   describe('【メソッド】differenceのテストを実行する。', (): void => {
     test('引数"arrayA"の値の中から"arrayB"の値を取り除いた値を全て返すことをテストする。', (): void => {
-      expect(ArrayUtil.difference({ arrayA: ['A', 'B', 'C', 'A', 'D'], arrayB: ['A', 'B', 'A', 'E'] })).toEqual(['C', 'D']);
+      expect(
+        ArrayUtil.difference({
+          arrayA: ['A', 'B', 'C', 'A', 'D'],
+          arrayB: ['A', 'B', 'A', 'E'],
+        })
+      ).toEqual(['C', 'D']);
     });
 
     test('引数"arrayA"と"arrayB"の値が全て同じ場合は空の配列を返すことをテストする。', (): void => {
-      expect(ArrayUtil.difference({ arrayA: ['A', 'B', 'C', 'A', 'D'], arrayB: ['A', 'B', 'C', 'A', 'D'] })).toEqual([]);
+      expect(
+        ArrayUtil.difference({
+          arrayA: ['A', 'B', 'C', 'A', 'D'],
+          arrayB: ['A', 'B', 'C', 'A', 'D'],
+        })
+      ).toEqual([]);
     });
   });
 });
