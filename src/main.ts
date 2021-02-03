@@ -1,8 +1,6 @@
 import { performance } from 'perf_hooks';
 // import { SortUtil } from './utils/sortUtil';
 
-let arr: number[] = [];
-
 /***
  * min以上max未満の乱数を返却する。
  *
@@ -19,12 +17,13 @@ function getRandomInt({ min, max }: { min: number; max: number }): number {
 /**
  * 整数の乱数配列を生成する。
  *
- * @param max number ランダムに生成する数値範囲の最大
+ * @param min number 最小値（整数）
  * @param length number 生成する配列の長さ
  * @returns 整数の乱数配列
  */
-function getRandomArray({ min, length }: { min: number; length: number }) {
-  let initAry = [];
+function getRandomArray({ min, length }: { min: number; length: number }): number[] {
+  const initAry: number[] = [];
+  const arr: number[] = [];
 
   for (let i = 0; i < length; i++) {
     initAry.push(min + i);
@@ -33,16 +32,16 @@ function getRandomArray({ min, length }: { min: number; length: number }) {
   while (initAry.length > 0) {
     arr.push(
       initAry
-        .splice(getRandomInt({ min: 0, max: initAry.length }), 1)
+        .splice(getRandomInt({ min: min, max: initAry.length }), 1)
         .slice(-1)[0]
     );
   }
 
-  return arr as number[];
+  return arr;
 }
 
 function start() {
-  arr = getRandomArray({ min: 0, length: 10000 });
+  const arr = getRandomArray({ min: 0, length: 10000 });
 
   // 実行
   const startTime = performance.now();
