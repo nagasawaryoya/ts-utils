@@ -17,17 +17,17 @@ export class ArrayUtil {
   /**
    * 値が配列であるか検証する。
    *
-   * @param T[] array 対象配列
+   * @param any arg 対象要素
    * @returns boolean true: 配列である false: 配列でない
    */
-  public static is(array: any): boolean {
-    return array && Array.isArray(array);
+  public static is(arg: any): arg is Array<any> {
+    return arg && Array.isArray(arg);
   }
 
   /**
    * 配列が空か検証する。
    *
-   * @param T array 対象配列
+   * @param T[] | null | undefined array 対象配列
    * @returns true: 配列である false: 配列でない
    */
   public static isEmpty<T>(array: T[] | null | undefined): boolean {
@@ -37,11 +37,11 @@ export class ArrayUtil {
   /**
    * 値を配列にして返却する。
    *
-   * @param T value 値
+   * @param T arg 値
    * @returns T[]
    */
-  public static arrange<T>(value: any): T[] {
-    return this.is(value) ? value : [value];
+  public static arrange<T>(arg: any): T[] {
+    return this.is(arg) ? arg : [arg];
   }
 
   /**
