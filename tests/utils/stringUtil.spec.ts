@@ -30,7 +30,6 @@ describe('StringUtilクラスのテストを実行する。', (): void => {
 
   describe('【メソッド】arrangeのテストを実行する。', (): void => {
     it('引数に渡された値を文字列にして返すことをテストする。', (): void => {
-      console.log(typeof StringUtil.arrange(undefined));
       expect(StringUtil.arrange(1)).toBe('1');
       expect(StringUtil.arrange({ test: 'aaaa' })).toBe('{"test":"aaaa"}');
       expect(StringUtil.arrange(null)).toBe('null');
