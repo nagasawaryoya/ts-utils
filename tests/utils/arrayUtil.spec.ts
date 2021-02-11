@@ -456,4 +456,26 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
       ).toEqual([]);
     });
   });
+
+  describe('【メソッド】swapのテストを実行する。', (): void => {
+    it('引数で受け取った要素同士の配列内の順序を入れ替えた配列を返すことをテストする。', (): void => {
+      expect(
+        ArrayUtil.swap<string>({
+          array: ['A', 'B', 'C', 'D', 'E'],
+          index1: 1,
+          index2: 2,
+        })
+      ).toEqual(['A', 'C', 'B', 'D', 'E']);
+    });
+
+    it('引数"index1"と"index2"の値が同じ場合は入れ替えずに配列を返すことをテストする。', (): void => {
+      expect(
+        ArrayUtil.swap<string>({
+          array: ['A', 'B', 'C', 'D', 'E'],
+          index1: 2,
+          index2: 2,
+        })
+      ).toEqual(['A', 'B', 'C', 'D', 'E']);
+    });
+  });
 });
