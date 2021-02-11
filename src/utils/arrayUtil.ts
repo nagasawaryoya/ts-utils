@@ -17,8 +17,8 @@ export class ArrayUtil {
   /**
    * 値が配列であるか検証する。
    *
-   * @param any arg 対象要素
-   * @returns boolean true: 配列である false: 配列でない
+   * @param {any} arg 対象要素
+   * @returns {boolean} true: 配列である false: 配列でない
    */
   public static is(arg: any): arg is Array<any> {
     return arg && Array.isArray(arg);
@@ -27,8 +27,8 @@ export class ArrayUtil {
   /**
    * 配列が空か検証する。
    *
-   * @param T[] | null | undefined array 対象配列
-   * @returns true: 配列である false: 配列でない
+   * @param {T[] | null | undefined} array 対象配列
+   * @returns {boolean} true: 配列である false: 配列でない
    */
   public static isEmpty<T>(array: T[] | null | undefined): boolean {
     return !array || array.length === 0;
@@ -37,8 +37,8 @@ export class ArrayUtil {
   /**
    * 値を配列にして返却する。
    *
-   * @param T arg 値
-   * @returns T[]
+   * @param {T} arg 値
+   * @returns {T[]}
    */
   public static arrange<T>(arg: any): T[] {
     return this.is(arg) ? arg : [arg];
@@ -47,8 +47,8 @@ export class ArrayUtil {
   /**
    * 配列をdeepコピーする。
    *
-   * @param T[] array 値
-   * @returns T[] deepコピーした配列
+   * @param {T[]} array 値
+   * @returns {T[]} deepコピーした配列
    */
   public static deepCopy<T>(array: T[]): T[] {
     return JSON.parse(JSON.stringify(array));
@@ -57,8 +57,8 @@ export class ArrayUtil {
   /**
    * 配列をshallowコピーする。
    *
-   * @param T[] array 値
-   * @returns T[] shallowコピーした配列
+   * @param {T[]} array 値
+   * @returns {T[]} shallowコピーした配列
    */
   public static shallowCopy<T>(array: T[]): T[] {
     return [...array];
@@ -67,9 +67,9 @@ export class ArrayUtil {
   /**
    * 配列内の重複値の配列を返却する。
    *
-   * @param array 対象配列
-   * @param ignore 無視する値
-   * @returns T[]: 重複値配列 (未存在の場合は空配列を返却)
+   * @param {T[]} array 対象配列
+   * @param {T | undefined} ignore 無視する値
+   * @returns {T[]} 重複値配列 (未存在の場合は空配列を返却)
    */
   public static duplicate<T>({
     array,
@@ -91,10 +91,10 @@ export class ArrayUtil {
   /**
    * object配列を指定keyの値で検索しkeyValueとkey重複している値の先頭を返却する。
    *
-   * @param T[] array 対象配列
-   * @param Primitive keyValue 検証値
-   * @param string key キーフィールド名
-   * @returns T: 検索結果配列の先頭の値 null: 未存在
+   * @param {T[]} array 対象配列
+   * @param {Primitive} keyValue 検証値
+   * @param {string} key キーフィールド名
+   * @returns {T | null} 検索結果配列の先頭の値 | 未存在
    */
   public static findOne<T>({
     array,
@@ -111,10 +111,10 @@ export class ArrayUtil {
   /**
    * object配列を指定keyの値で検索しkeyValueとkey重複している値を全て返却する。
    *
-   * @param T[] array 対象配列
-   * @param Primitive keyValue 検証値
-   * @param string key キーフィールド名
-   * @returns T[]: 検索結果配列 (未存在の場合は空配列を返却)
+   * @param {T[]} array 対象配列
+   * @param {Primitive} keyValue 検証値
+   * @param {string} key キーフィールド名
+   * @returns {T[]} 検索結果配列 (未存在の場合は空配列を返却)
    */
   public static find<T>({
     array,
@@ -132,9 +132,9 @@ export class ArrayUtil {
    * 配列内の値を一意にして返却する。
    * keyが指定されている時は、object配列
    *
-   * @param T[] array 対象配列
-   * @param string key キーフィールド名
-   * @returns T[]: 値が一意な配列
+   * @param {T[]} array 対象配列
+   * @param {string} key キーフィールド名
+   * @returns {T[]}: 値が一意な配列
    */
   public static unique<T>({ array, key }: { array: T[]; key?: keyof T }): T[] {
     return array.filter(
@@ -149,9 +149,9 @@ export class ArrayUtil {
    * 配列を指定した値でグループ化して返却する。
    * keyが指定されている時は、object配列
    *
-   * @param T[] array 対象配列
-   * @param keyof T key キーフィールド名
-   * @returns GroupObj<T> 値でグループ化されたobject
+   * @param {T[]} array 対象配列
+   * @param {keyof T} key キーフィールド名
+   * @returns {GroupObj<T>} 値でグループ化されたobject
    */
   public static grouping<T>({
     array,
@@ -172,8 +172,8 @@ export class ArrayUtil {
   /**
    * 配列を指定した値でフラット化して返却する。
    *
-   * @param any[] array 対象配列
-   * @returns T[] フラット化した配列
+   * @param {any[]} array 対象配列
+   * @returns {T[]} フラット化した配列
    */
   public static flatten<T>(array: any[]): T[] {
     if (array.every((arr: unknown[]) => !this.is(arr))) {
@@ -188,8 +188,8 @@ export class ArrayUtil {
    * [] => 0
    * [[]] => 1
    *
-   * @param any[] array 対象配列
-   * @returns number 最大階層
+   * @param {any[]} array 対象配列
+   * @returns {number} 最大階層
    */
   public static maxLevel(array: any[]): number {
     if (array.every((arr: unknown[]) => !this.is(arr))) {
@@ -202,10 +202,10 @@ export class ArrayUtil {
   /**
    * 任意の範囲、増分の等差数列作成する。
    *
-   * @param number start 数列の開始
-   * @param number stop 数列の終了
-   * @param number step 数列の増分
-   * @returns number[] 数列
+   * @param {number} start 数列の開始
+   * @param {number} stop 数列の終了
+   * @param {number} step 数列の増分
+   * @returns {number[]} 数列
    */
   public static range({
     start,
@@ -231,9 +231,9 @@ export class ArrayUtil {
    * arrayAはarrayBの上位集合（スーパーセット）である。
    * arrayBはarrayAの下位集合（サブセット）である。
    *
-   * @param T[] arrayA 対象配列A
-   * @param T[] arrayB 対象配列B
-   * @returns boolean
+   * @param {T[]} arrayA 対象配列A
+   * @param {T[]} arrayB 対象配列B
+   * @returns {boolean}
    */
   public static isSuperset<T>({
     arrayA,
@@ -250,9 +250,9 @@ export class ArrayUtil {
   /**
    * arrayAとarrayBの和集合を返却する。
    *
-   * @param T[] arrayA 対象配列A
-   * @param T[] arrayB 対象配列B
-   * @returns T[] 和集合
+   * @param {T[]} arrayA 対象配列A
+   * @param {T[]} arrayB 対象配列B
+   * @returns {T[]} 和集合
    */
   public static union<T>({
     arrayA,
@@ -270,9 +270,9 @@ export class ArrayUtil {
   /**
    * arrayAとarrayBの積集合を返却する。
    *
-   * @param T[] arrayA 対象配列A
-   * @param T[] arrayB 対象配列B
-   * @returns T[] 積集合
+   * @param {T[]} arrayA 対象配列A
+   * @param {T[]} arrayB 対象配列B
+   * @returns {T[]} 積集合
    */
   public static intersection<T>({
     arrayA,
@@ -293,9 +293,9 @@ export class ArrayUtil {
   /**
    * arrayAとarrayBの差集合を返却する。
    *
-   * @param T[] arrayA 対象配列A
-   * @param T[] arrayB 対象配列B
-   * @returns T[] 差集合
+   * @param {T[]} arrayA 対象配列A
+   * @param {T[]} arrayB 対象配列B
+   * @returns {T[]} 差集合
    */
   public static difference<T>({
     arrayA,
