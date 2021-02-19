@@ -332,4 +332,40 @@ export class ArrayUtil {
     array[index2] = tmp;
     return array;
   }
+
+  /**
+   * 深さnのオブジェクト配列を探索し、任意の値と一致したオブジェクトを取り除いた配列を返却する。
+   *
+   * @param {any[]} array 対象配列
+   * @param {string | number} value 任意の値
+   * @param {string | number} targetKey オブジェクト内の対象のkey
+   * @param {string | number} childrenKey 配列内を掘るための葉ノードのkey
+   * @returns {any[]} オブジェクト配列
+   */
+  public static removeTreeValue({
+    tree,
+    value,
+    targetKey = 'id',
+    childrenKey = 'children',
+  }: {
+    tree: any[];
+    value: string | number;
+    targetKey?: string | number;
+    childrenKey?: string | number;
+  }): any[] {
+    return tree.filter((tr) => {
+      if (tr[targetKey] === value) {
+        return false;
+      } else if (tr[childrenKey] && tr[childrenKey].length > 0) {
+        tr[childrenKey] = removeTreeValue({
+          tree: tr[childrenKey],
+          value: value,
+          targetKey: targetKey,
+          childrenKey: childrenKey,
+        });
+      }
+      return true;
+    });
+  };
+
 }
