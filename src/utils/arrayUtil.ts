@@ -357,7 +357,7 @@ export class ArrayUtil {
       if (tr[targetKey] === value) {
         return false;
       } else if (tr[childrenKey] && tr[childrenKey].length > 0) {
-        tr[childrenKey] = removeTreeValue({
+        tr[childrenKey] = this.removeTreeValue({
           tree: tr[childrenKey],
           value: value,
           targetKey: targetKey,
@@ -366,6 +366,5 @@ export class ArrayUtil {
       }
       return true;
     });
-  };
-
+  }
 }
