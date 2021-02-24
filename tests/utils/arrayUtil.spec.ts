@@ -22,6 +22,33 @@ const deepNestObjectArray = [
   ],
 ];
 
+const removeTreeValueArray: any[] = [
+  {
+    name: '1',
+    child: [{ name: '2' }, { name: '3' }],
+  },
+  {
+    name: '4',
+    child: [{ name: '5' }, { name: '6' }],
+  },
+  {
+    name: '7',
+    child: [
+      { name: '8' },
+      {
+        name: '9',
+        child: [
+          { name: '10' },
+          {
+            name: '11',
+            child: [{ name: '12' }],
+          },
+        ],
+      },
+    ],
+  },
+];
+
 describe('ArrayUtilクラスのテストを実行する。', (): void => {
   describe('【メソッド】isのテストを実行する。', (): void => {
     it('引数に配列が渡された場合は「true」を返すことをテストする。', (): void => {
@@ -476,6 +503,28 @@ describe('ArrayUtilクラスのテストを実行する。', (): void => {
           index2: 2,
         })
       ).toEqual(['A', 'B', 'C', 'D', 'E']);
+    });
+  });
+
+  describe('【メソッド】removeTreeValueのテストを実行する。', (): void => {
+    it('深さnのオブジェクト配列を探索し、任意の値と一致したオブジェクトを取り除いた配列を返すことをテストする。', (): void => {
+      expect(
+        ArrayUtil.removeTreeValue({
+          tree: removeTreeValueArray,
+          value: '7',
+          targetKey: 'name',
+          childrenKey: 'child',
+        })
+      ).toEqual([
+        {
+          name: '1',
+          child: [{ name: '2' }, { name: '3' }],
+        },
+        {
+          name: '4',
+          child: [{ name: '5' }, { name: '6' }],
+        },
+      ]);
     });
   });
 });
